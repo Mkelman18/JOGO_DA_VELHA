@@ -1,0 +1,162 @@
+*{
+    /*chamado RESET - ele vai chamar todos os elementos da nossa pág*/
+box-sizing:border-box;
+margin: 0;
+padding:0;
+}
+
+body{
+    background: linear-gradient(90deg, rgb(255, 255, 255),rgb(235, 127, 181), pink, rgb(167, 10, 62) 0%,
+    rgb(250, 116, 194) 100%);
+    height: 100vh;
+    width: 100vw;
+}
+
+.board{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto); /*Criar 3 colunas e auto = largura - auto - vai ocupar
+                                             a largura que o conteúdo precisar dentro da célula*/
+}
+
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    background:rgba(255,255,255,0.5) !important;
+}
+
+/*Célula*/
+
+.cell{
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;/*O display, o justify e align é para garantir que o conteúdo irá ficar dentro da célula */
+    position: relative;
+
+}
+
+/*Mensagem da Vitória*/
+
+ /*vamos tirar a borda de cima da 1ª 2ª 3ª célula filho do board*/
+ .cell:nth-child(1),
+ .cell:nth-child(2),
+ .cell:nth-child(3){
+    border-top:none; /*sem borda nos tres primeiros filhos*/
+ }
+
+ .cell:nth-child(3),
+ .cell:nth-child(6),
+ .cell:nth-child(9){
+    border-right:none; /*sem borda nos tres primeiros filhos*/
+ }
+
+ .cell:nth-child(1),
+ .cell:nth-child(4),
+ .cell:nth-child(7){
+    border-left:none; /*sem borda nos tres primeiros filhos*/
+ }
+
+ .cell:nth-child(7),
+ .cell:nth-child(8),
+ .cell:nth-child(9){
+    border-bottom:none; /*sem borda nos tres primeiros filhos*/
+ }
+ 
+/*x*/
+
+.cell.x::before,
+.cell.x::after,
+
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before {
+
+    content: "";
+    height:calc(100px * 0.15);
+    width:calc(100px * 0.9);
+    background:rgb(255, 255, 255);
+    position:absolute;
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+/*Circle*/
+
+.cell.circle::before,
+.cell.circle::after,
+
+
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    content: "";
+    height:calc(100px * 0.9);
+    width:calc(100px * 0.9);
+    background: rgb(255, 255, 255);
+    position:absolute;
+    border-radius: 50%; 
+}
+
+.cell.x, .cell.circle {
+    cursor: not-allowed;
+
+}
+
+.winning-message{
+    display: none;
+}
+
+.winning-message{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 146, 191);
+    flex-direction: column;
+}
+
+.winning-message-button{
+    font-size: 2.5rem;
+    background-color: rgb(255, 0, 128);
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    margin-top:16px ;
+    color:azure;
+}
+    
+.winning-message-button:hover{
+    color:rgb(255, 0, 85);
+    background-color:white;
+}
+
+.winning-message-text{
+    color: rgb(255, 0, 128);
+    font-size: 5rem;
+}
+
+.show-winning-message{
+    display: flex;
+}
+
+
